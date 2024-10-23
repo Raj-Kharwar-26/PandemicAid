@@ -36,6 +36,8 @@ export default function Home() {
       image: "https://asset.gallup.com/p/POLL/3d4a65dd-f292-4a03-84f4-732aab5e0275.jpg",
     },
   ]);
+  const [selectedPandemic, setSelectedPandemic] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchPandemics();
@@ -48,6 +50,16 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching pandemics:", error);
     }
+  };
+
+  const openModal = (pandemic) => {
+    setSelectedPandemic(pandemic);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedPandemic(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -89,6 +101,7 @@ export default function Home() {
             <PandemicCard
               key={pandemic.id}
               pandemic={pandemic}
+              onOpen={openModal}
             />
           ))}
         </div>
@@ -105,6 +118,14 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {selectedPandemic && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          pandemic={selectedPandemic}
+        />
+      )}
     </div>
   );
 }

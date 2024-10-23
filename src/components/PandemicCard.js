@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function PandemicCard({ pandemic }) {
-    const [expanded, setExpanded] = useState(false);
-
-    const handleClick = () => {
-        setExpanded(!expanded);
-    };
-
+function PandemicCard({ pandemic, onOpen }) {
     return (
-        <div className="pandemic-card" onClick={handleClick}>
-            <img src={pandemic.image} alt={pandemic.name} />
+        <div
+            className="pandemic-card bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+            onClick={() => onOpen(pandemic)}
+        >
+            <img src={pandemic.image} alt={pandemic.name} className="w-full h-48 object-cover" />
             <h3 className="text-xl font-bold text-gray-800 p-4">{pandemic.name}</h3>
-            {expanded && <p className="text-gray-600 p-4">{pandemic.details}</p>}
         </div>
     );
 }
