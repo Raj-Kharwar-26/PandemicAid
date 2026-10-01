@@ -15,6 +15,10 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/ngos" component={NGOList} />
           </Switch>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/ngos" component={NGOList} />
+          </Switch>
         </main>
         <Footer />
       </div>
